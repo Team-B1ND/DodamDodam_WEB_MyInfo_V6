@@ -1,18 +1,18 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import * as S from "./style";
-import { BiPlus } from "react-icons/bi";
-import DODAM_DEFAULT_PROFILE from "../../../../../images/default_profile.png";
-import CAMERA_IMAGE from "../../../../../images/camera.svg";
-import { MyInfoModifyModalState } from "../../../../../store/modal";
-import useModifyMainProfile from "../../../../../hooks/mainProfile/useModifyMainProfile";
-import fileUpload from "../../../../../repository/mainProfile/fileUpload";
-import { autoHypenPhone } from "../../../../../util/autoHypenPhone";
-import { profileInfo } from "../../../../../store/profile";
-import useMyGradeInfo from "../../../../../hooks/profile/useMyGradeInfo";
-import MyInfoClassModifyModal from "../MyInfoClassModifyModal/MyInfoClassModifyModal";
-import patternCheck from "../../../../../util/patternCheck";
-import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import * as S from './style';
+import { BiPlus } from 'react-icons/bi';
+import DODAM_DEFAULT_PROFILE from '../../../../../images/default_profile.png';
+import CAMERA_IMAGE from '../../../../../images/camera.svg';
+import { MyInfoModifyModalState } from '../../../../../store/modal';
+import useModifyMainProfile from '../../../../../hooks/mainProfile/useModifyMainProfile';
+import fileUpload from '../../../../../repository/mainProfile/fileUpload';
+import { autoHypenPhone } from '../../../../../util/autoHypenPhone';
+import { profileInfo } from '../../../../../store/profile';
+import useMyGradeInfo from '../../../../../hooks/profile/useMyGradeInfo';
+import MyInfoClassModifyModal from '../MyInfoClassModifyModal/MyInfoClassModifyModal';
+import patternCheck from '../../../../../util/patternCheck';
+import { B1ndToast } from '@b1nd/b1nd-toastify';
 
 const MyInfoModifyModal = () => {
   const [isOpenMyInfoModifyModal, setIsOpenMyInfoModifyModal] = useRecoilState(MyInfoModifyModalState);
@@ -22,10 +22,10 @@ const MyInfoModifyModal = () => {
 
   const { student, phone, email, profileImage } = tempProfileInfo;
 
-  const [emailInfo, setEmailInfo] = useState<string>("");
-  const [phoneInfo, setPhoneInfo] = useState<string>("");
+  const [emailInfo, setEmailInfo] = useState<string>('');
+  const [phoneInfo, setPhoneInfo] = useState<string>('');
 
-  const [tempPhoneInfo, setTempPhoneInfo] = useState<string>("");
+  const [tempPhoneInfo, setTempPhoneInfo] = useState<string>('');
 
   const { patchMainProfile } = useModifyMainProfile();
 
@@ -48,8 +48,10 @@ const MyInfoModifyModal = () => {
     try {
       const formData = new FormData();
       if (e.target.files) {
-        formData.append("file", e.target.files[0]);
-        const { data } = await fileUpload.postFileUpload(formData.get("file") ? formData : "");
+        const url = URL.createObjectURL(e.target.files[0]);
+        setImageSrc(url);
+        formData.append('file', e.target.files[0]);
+        const { data } = await fileUpload.postFileUpload(formData.get('file') ? formData : '');
         if (data) {
           setImageSrc(data);
         }
@@ -58,7 +60,7 @@ const MyInfoModifyModal = () => {
   };
 
   useEffect(() => {
-    setPhoneInfo(tempPhoneInfo.split("-")[0] + tempPhoneInfo.split("-")[1] + tempPhoneInfo.split("-")[2]);
+    setPhoneInfo(tempPhoneInfo.split('-')[0] + tempPhoneInfo.split('-')[1] + tempPhoneInfo.split('-')[2]);
   }, [tempPhoneInfo]);
 
   const emailInfoHandler = (e: any) => {
@@ -78,12 +80,12 @@ const MyInfoModifyModal = () => {
       )
     ) {
       try {
-        if (!patternCheck.emailCheck(emailInfo) || emailInfo.trim() === "") {
-          return B1ndToast.showInfo("이메일 형식을 지켜주세요!");
+        if (!patternCheck.emailCheck(emailInfo) || emailInfo.trim() === '') {
+          return B1ndToast.showInfo('이메일 형식을 지켜주세요!');
         }
 
-        if (!patternCheck.phoneCheck(phoneInfo) || phoneInfo.trim() === "") {
-          return B1ndToast.showInfo("전화번호 형식을 지켜주세요!");
+        if (!patternCheck.phoneCheck(phoneInfo) || phoneInfo.trim() === '') {
+          return B1ndToast.showInfo('전화번호 형식을 지켜주세요!');
         }
 
         await patchMainProfile({
@@ -92,7 +94,7 @@ const MyInfoModifyModal = () => {
           phone: phoneInfo,
         });
 
-        B1ndToast.showSuccess("내 정보를 수정하셨습니다!");
+        B1ndToast.showSuccess('내 정보를 수정하셨습니다!');
 
         setTempProfileInfo({
           ...tempProfileInfo,
@@ -103,10 +105,10 @@ const MyInfoModifyModal = () => {
 
         setIsOpenMyInfoModifyModal((prev: boolean) => !prev);
       } catch (error) {
-        B1ndToast.showError("내 정보를 수정하지 못했습니다!");
+        B1ndToast.showError('내 정보를 수정하지 못했습니다!');
       }
     } else {
-      B1ndToast.showInfo("내 정보를 수정해주세요!");
+      B1ndToast.showInfo('내 정보를 수정해주세요!');
     }
   };
 
@@ -122,11 +124,11 @@ const MyInfoModifyModal = () => {
         <BiPlus
           className="exitIcon"
           style={{
-            fontSize: "30px",
-            transform: "rotate(45deg)",
-            position: "absolute",
-            top: "20px",
-            right: "20px",
+            fontSize: '30px',
+            transform: 'rotate(45deg)',
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
           }}
           onClick={() => {
             setIsOpenMyInfoModifyModal(false);
@@ -144,7 +146,7 @@ const MyInfoModifyModal = () => {
               {isLoading ? (
                 <>로딩중..</>
               ) : (
-                <S.ModalPictureImg src={imageSrc === null || imageSrc === "" ? DODAM_DEFAULT_PROFILE : imageSrc} />
+                <S.ModalPictureImg src={imageSrc === null || imageSrc === '' ? DODAM_DEFAULT_PROFILE : imageSrc} />
               )}
             </div>
 
@@ -154,7 +156,7 @@ const MyInfoModifyModal = () => {
               </div>
             </S.PictureImageModifyLabel>
             <input
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               type="file"
               id="file_upload"
               accept="image/jpg, image/png, image/jpeg"
@@ -164,7 +166,7 @@ const MyInfoModifyModal = () => {
 
           <S.PictureBecomeBasicImageBtn
             onClick={() => {
-              setImageSrc("");
+              setImageSrc('');
             }}
           >
             기본 프로필로 변경
