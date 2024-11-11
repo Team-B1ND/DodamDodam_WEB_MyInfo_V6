@@ -166,7 +166,7 @@ const MyInfoModifyModal = () => {
 
           <S.PictureBecomeBasicImageBtn
             onClick={() => {
-              setImageSrc('');
+              setImageSrc(null);
             }}
           >
             기본 프로필로 변경
