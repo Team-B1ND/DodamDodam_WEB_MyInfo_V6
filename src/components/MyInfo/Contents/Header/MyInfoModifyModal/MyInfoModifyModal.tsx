@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import * as S from './style';
 import { BiPlus } from 'react-icons/bi';
 import DODAM_DEFAULT_PROFILE from '../../../../../images/default_profile.png';
@@ -15,7 +15,7 @@ import patternCheck from '../../../../../util/patternCheck';
 import { B1ndToast } from '@b1nd/b1nd-toastify';
 
 const MyInfoModifyModal = () => {
-  const [isOpenMyInfoModifyModal, setIsOpenMyInfoModifyModal] = useRecoilState(MyInfoModifyModalState);
+  const setIsOpenMyInfoModifyModal = useSetRecoilState(MyInfoModifyModalState);
 
   const { isLoading } = useMyGradeInfo();
   const [tempProfileInfo, setTempProfileInfo] = useRecoilState(profileInfo);
