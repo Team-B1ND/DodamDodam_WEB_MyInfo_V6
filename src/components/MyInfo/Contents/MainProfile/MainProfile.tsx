@@ -20,7 +20,7 @@ const MainProfile = () => {
     <S.MainProfileWrap>
       <ComponentTitle>
         <S.HappyFaceImg src={happy_face} />
-        <S.MainProfileText>내 프로필</S.MainProfileText>
+        <S.MainProfileText>내 프로필..</S.MainProfileText>
       </ComponentTitle>
       <S.MainProfileMainWrap>
         <S.MainProfileMiddleWrap>
