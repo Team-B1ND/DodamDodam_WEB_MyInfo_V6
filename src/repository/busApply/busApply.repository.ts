@@ -21,7 +21,7 @@ class BusApplyRepository {
   }
 
   public async patchBusApply({ idx }: BusApplyParam): Promise<void> {
-    await customAxios.patch(`/bus/apply/${idx}`);
+    await customAxios.patch(`/bus/apply/status/${idx}`);
   }
   
   public async deleteBusApply({ idx }: BusApplyParam): Promise<void>{
