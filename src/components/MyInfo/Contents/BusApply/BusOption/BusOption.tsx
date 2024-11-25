@@ -21,10 +21,7 @@ const BusOption = ({ data, isSelect, onChangeApplyBus }: Props) => {
         </>
       ) : (
         <>
-          <S.BusOptionStationText isSelect={isSelect}>{busNumber}</S.BusOptionStationText>
-          <S.BusOptionStationText isSelect={isSelect}>
-            {data.applyCount}/{data.peopleLimit}
-          </S.BusOptionStationText>
+          <S.BusOptionStationText isSelect={isSelect}>{busNumber}   {data.applyCount}/{data.peopleLimit}</S.BusOptionStationText>
           <S.BusOptionStationText isSelect={isSelect}>{busName}</S.BusOptionStationText>
           <S.BusOptionStationText isSelect={isSelect}>
             ({data.leaveTime.split(' ')[1].substring(0, 5)})
